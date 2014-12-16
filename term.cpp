@@ -1,6 +1,6 @@
 #include "term.h"
 
-Term::Term() : term_size(), term_window(nullptr) {
+Term::Term() : term_window(nullptr), term_size() {
 }
 void Term::term_init() {
         term_window = initscr();
