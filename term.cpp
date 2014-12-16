@@ -31,4 +31,5 @@ TermSize Term::term_get_size() {
 Term::~Term() {
         if(!isendwin()) 
                 endwin();
+        term_window = nullptr;
 }
