@@ -7,10 +7,10 @@
 int main() {
         Term term;
         term.term_init();
-        term.term_print("Hello world");
+        Win *print_win = term.new_window(20,30,20,20);
+        print_win->print("Hello Worlds");
         char ch;
         while((ch = term.term_getch()) != 'q') {
-                term.term_print("Hello world\n");
         }
         return 0;
 }
