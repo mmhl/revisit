@@ -1,7 +1,7 @@
-LDFLAGS=-lncurses
 CC=g++
-CXXFLAGS=--std=c++11 -Wall
 EXECUTABLE=revisit
+CXXFLAGS=--std=c++11 -Wall -o $(EXECUTABLE)
+LDFLAGS=-lncurses
 
 all: $(EXECUTABLE) 
 $(EXECUTABLE): main.o term.o level.o
