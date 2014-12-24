@@ -18,7 +18,10 @@ int main() {
                 stringstream ss;
                 ss << "You pressed: " << ch; // Idea: Let class StatusBar be a stream.
                 status_window->erase();
-                status_window->print(ss.str());
+                status_window->print("You pressed: ");
+                status_window->win_attr_on(NC_ATTR::ATTR_BOLD);
+                status_window->print(ch);
+                status_window->win_attr_off();
                 status_window->refresh();
         }
         return 0;

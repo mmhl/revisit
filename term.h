@@ -8,14 +8,20 @@ struct TermSize {
         int y;
         int x;
 };
+enum class NC_ATTR {
+        ATTR_BOLD,
+};
 
 class Win {
 public:
         Win(WINDOW *win, int y, int x, int beg_y, int beg_x);
         void print(string str);
+        void print(char ch);
         void print_at(string str, int y, int x);
         void refresh();
         void erase();
+        int win_attr_on(NC_ATTR attr);
+        int win_attr_off();
         virtual ~Win();
 protected:
         int size_y, size_x, pos_y, pos_x;

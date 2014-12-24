@@ -9,10 +9,13 @@ Win::~Win() {
         delwin(dwin);
 };
 void Win::print(string str) {
-      wprintw(dwin, "%s", str.c_str());
+        wprintw(dwin, "%s", str.c_str());
+}
+void Win::print(char ch) {
+        wprintw(dwin, "%c", ch);
 }
 void Win::print_at(string str, int y, int x) {
-       mvwprintw(dwin, y, x, "%s", str.c_str());
+        mvwprintw(dwin, y, x, "%s", str.c_str());
 }
 //Refresh both main window and drawing window
 void Win::refresh() {
@@ -23,7 +26,26 @@ void Win::erase() {
         werase(dwin); 
         refresh();
 }
+int Win::win_attr_on(NC_ATTR attr) {
+        int attributes = 0;
+        switch(attr) {
+                case NC_ATTR::ATTR_BOLD:
+                        attributes |= A_BOLD;
+                        break;
+                default:
+                        return -1;
+        }
+        wattrset(dwin, attributes);
+        refresh();
+        return 0;
+}
+int Win::win_attr_off() {
+        wattrset(dwin, A_NORMAL);
+        return 0;
+}
 
+
+//Term class.
 Term::Term() : size(), windows(), term_window(nullptr){
 }
 void Term::init() {
