@@ -13,24 +13,29 @@ class Win {
 public:
         Win(WINDOW *win, int y, int x, int beg_y, int beg_x);
         void print(string str);
+        void print_at(string str, int y, int x);
+        void refresh();
+        void erase();
         virtual ~Win();
 protected:
         int size_y, size_x, pos_y, pos_x;
 private:
         WINDOW *win;
+        WINDOW *dwin; // drawing area of bordered window
+        int cur_y, cur_x;
 };
 
 class Term  {
 public:
         Term();
         virtual ~Term();
-        void term_init(); 
-        void term_end();
+        void init(); 
+        void end();
         char term_getch();
         Win *new_window(int,int,int,int);
-        TermSize term_get_size();
+        TermSize get_size();
 protected:
-        TermSize term_size;
+        TermSize size;
 private:
         vector<Win *> windows;
         WINDOW *term_window; // Main term window; stdscr

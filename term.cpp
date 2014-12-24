@@ -1,21 +1,32 @@
 #include "term.h"
 
 Win::Win(WINDOW *win, int size_y, int size_x, int beg_y, int beg_x) 
-: size_y(size_y), pos_y(beg_y), pos_x(beg_x), win(win) {
-
+: size_y(size_y), pos_y(beg_y), pos_x(beg_x), win(win), dwin(nullptr), cur_y(0), cur_x(0) {
+       dwin = derwin(win, size_y-2, size_x-2, 1, 1);
 };
 Win::~Win() {
         delwin(win);
+        delwin(dwin);
 };
 void Win::print(string str) {
-      wprintw(win, "%s", str.c_str());
-      wrefresh(win);
+      wprintw(dwin, "%s", str.c_str());
+}
+void Win::print_at(string str, int y, int x) {
+       mvwprintw(dwin, y, x, "%s", str.c_str());
+}
+//Refresh both main window and drawing window
+void Win::refresh() {
+        wrefresh(win);
+        wrefresh(dwin);
+}
+void Win::erase() {
+        werase(dwin); 
+        refresh();
 }
 
-
-Term::Term() : term_size(), windows(), term_window(nullptr){
+Term::Term() : size(), windows(), term_window(nullptr){
 }
-void Term::term_init() {
+void Term::init() {
         term_window = initscr();
         wclear(term_window);
         wrefresh(term_window);
@@ -23,10 +34,10 @@ void Term::term_init() {
         raw();
         keypad(term_window, true);
         curs_set(0);
-        getmaxyx(term_window, term_size.y, term_size.x);
+        getmaxyx(term_window, size.y, size.x);
 }
 
-void Term::term_end() {
+void Term::end() {
         endwin();
 }
 
@@ -34,14 +45,16 @@ char Term::term_getch() {
         return wgetch(term_window);
 }
 //Consider capturing SIGWINCH for detecting terminal size change
-TermSize Term::term_get_size() {
-        return term_size;
+TermSize Term::get_size() {
+        return size;
 }
 Win *Term::new_window(int size_y, int size_x, int beg_y, int beg_x) {
         WINDOW *curse_window = newwin(size_y, size_x, beg_y, beg_x);  
         box(curse_window, 0, 0);
         Win *win = new Win(curse_window, size_y,size_x,beg_y,beg_x);
         windows.push_back(win);
+        wrefresh(term_window);
+        win->refresh(); 
         return win;
 }
 
