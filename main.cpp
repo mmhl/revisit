@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <sstream>
 #include "term.h"
+#include "world.h"
 
 int main() {
         setlocale(LC_ALL, "");
@@ -14,6 +15,9 @@ int main() {
         Win *game_window = term.new_window(tsize.y-3,tsize.x-1,0,0);
         Win *status_window = term.new_window(3,tsize.x-1,tsize.y-3, 0);
         game_window->refresh();
+        WorldDisplay wd(game_window);
+        status_window->refresh();
+        status_window->print("Created world display");
         status_window->refresh();
         char ch;
         while((ch = term.term_getch()) != 'q') {
