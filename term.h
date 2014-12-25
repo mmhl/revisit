@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 using namespace std;
+typedef cchar_t glyph;
 struct TermSize {
         int y;
         int x;
@@ -17,7 +18,7 @@ public:
         Win(WINDOW *win, int y, int x, int beg_y, int beg_x);
         void print(string str);
         void print(char ch);
-        void print(cchar_t ch);
+        void print(glyph ch);
         void print_at(string str, int y, int x);
         void refresh();
         void erase();
