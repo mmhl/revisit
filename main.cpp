@@ -6,6 +6,7 @@
 #include <sstream>
 #include "term.h"
 #include "world.h"
+#include "entity.h"
 
 int main() {
         setlocale(LC_ALL, "");
@@ -14,11 +15,9 @@ int main() {
         TermSize tsize = term.get_size();
         Win *game_window = term.new_window(tsize.y-3,tsize.x-1,0,0);
         Win *status_window = term.new_window(3,tsize.x-1,tsize.y-3, 0);
-        game_window->refresh();
+        Player player(1, 1);
         WorldDisplay wd(game_window);
-        status_window->refresh();
-        status_window->print("Created world display");
-        status_window->refresh();
+        wd.add_entity(&player);
         char ch;
         while((ch = term.term_getch()) != 'q') {
                 stringstream ss;
@@ -27,6 +26,7 @@ int main() {
                 status_window->print("You pressed: ");
                 status_window->print("\xE2\x98\xA0 ");
                 status_window->refresh();
+                wd.redraw();
         }
         return 0;
 }

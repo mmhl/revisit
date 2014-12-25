@@ -1,13 +1,17 @@
 #ifndef __WORLD_H__
 #define __WORLD_H__
 #include "term.h"
+#include "entity.h"
 #include <vector>
+
 class WorldDisplay {
 public:
-        WorldDisplay(Win *window);
-        void redraw(bool all = false);
+        WorldDisplay(Win *win);
+        virtual ~WorldDisplay();
+        int add_entity(Entity *entity);
+        int redraw(bool all = false);
 private:
-        //vector<Drawable *> objects; Drawable objects
+        std::vector<Entity *> objects; 
         Win *window;
 };
 #endif

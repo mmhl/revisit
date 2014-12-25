@@ -20,6 +20,7 @@ public:
         void print(char ch);
         void print(glyph ch);
         void print_at(string str, int y, int x);
+        void print_at(char g, int y, int x);
         void refresh();
         void erase();
         int win_attr_on(NC_ATTR attr);

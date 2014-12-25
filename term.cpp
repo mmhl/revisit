@@ -20,6 +20,9 @@ void Win::print(glyph ch) {
 void Win::print_at(string str, int y, int x) {
         mvwprintw(dwin, y, x, "%s", str.c_str());
 }
+void Win::print_at(char g, int y, int x) {
+        mvwaddch(dwin, y, x, g);
+}
 //Refresh both main window and drawing window
 void Win::refresh() {
         wrefresh(win);
