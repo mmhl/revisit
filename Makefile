@@ -1,7 +1,7 @@
 CC=g++
 EXECUTABLE=revisit
 CXXFLAGS=--std=c++11 -Wall -o $@
-LDFLAGS=-lncurses
+LDFLAGS=-lncursesw
 
 all: $(EXECUTABLE) 
 $(EXECUTABLE): main.o term.o 

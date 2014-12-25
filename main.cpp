@@ -1,3 +1,4 @@
+#include <locale.h>
 #include <iostream>
 #include <string>
 #include <ncurses.h>
@@ -6,6 +7,7 @@
 #include "term.h"
 
 int main() {
+        setlocale(LC_ALL, "");
         Term term;
         term.init();
         TermSize tsize = term.get_size();
@@ -19,9 +21,7 @@ int main() {
                 ss << "You pressed: " << ch; // Idea: Let class StatusBar be a stream.
                 status_window->erase();
                 status_window->print("You pressed: ");
-                status_window->win_attr_on(NC_ATTR::ATTR_BOLD);
-                status_window->print(ch);
-                status_window->win_attr_off();
+                status_window->print("\xE2\x98\xA0 ");
                 status_window->refresh();
         }
         return 0;

@@ -14,6 +14,9 @@ void Win::print(string str) {
 void Win::print(char ch) {
         wprintw(dwin, "%c", ch);
 }
+void Win::print(cchar_t ch) {
+        wadd_wch(dwin, &ch);
+}
 void Win::print_at(string str, int y, int x) {
         mvwprintw(dwin, y, x, "%s", str.c_str());
 }
