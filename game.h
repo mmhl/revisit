@@ -1,6 +1,8 @@
 #ifndef __GAME_H__
 #define __GAME_H__
 #include "term.h"
+#include "object.h"
+
 enum class GameState {
         RUNNING,
         PAUSED,
@@ -19,5 +21,6 @@ private:
         Win *m_status_bar;
         Win *m_world_screen;
         GameState m_state;
+        Object m_test_player; // TEMP
 };
 #endif
