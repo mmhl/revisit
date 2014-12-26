@@ -1,3 +1,4 @@
+#include "err.h"
 #include "term.h"
 
 Win::Win(WINDOW *win, int size_y, int size_x, int beg_y, int beg_x) 
@@ -56,6 +57,9 @@ Term::Term() : size(), windows(), term_window(nullptr){
 }
 void Term::init() {
         term_window = initscr();
+        if(term_window == nullptr) {
+                fatal("Can't initialize curses!");
+        }
         wclear(term_window);
         wrefresh(term_window);
         noecho();
@@ -78,12 +82,19 @@ TermSize Term::get_size() {
 }
 Win *Term::new_window(int size_y, int size_x, int beg_y, int beg_x) {
         WINDOW *curse_window = newwin(size_y, size_x, beg_y, beg_x);  
+        if(curse_window == nullptr)
+                fatal("Can't create winndow with ncurses");
         box(curse_window, 0, 0);
-        Win *win = new Win(curse_window, size_y,size_x,beg_y,beg_x);
-        windows.push_back(win);
-        wrefresh(term_window);
-        win->refresh(); 
-        return win;
+        try {
+                Win *win = new Win(curse_window, size_y,size_x,beg_y,beg_x);
+                windows.push_back(win);
+                wrefresh(term_window);
+                win->refresh(); 
+                return win;
+        }
+        catch(std::bad_alloc &e) {
+                fatal("Bad alloc: " + std::string(e.what()));
+        }
 }
 
 Term::~Term() {

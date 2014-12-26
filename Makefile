@@ -12,3 +12,5 @@ term.o: term.cpp
 	$(CC) $(CXXFLAGS) -c term.cpp 
 game.o: game.cpp
 	$(CC) $(CXXFLAGS) -c game.cpp
+err.o: err.cpp
+	$(CC) $(CXXFLAGS) -c err.cpp
