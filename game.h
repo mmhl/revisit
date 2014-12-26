@@ -8,14 +8,14 @@ enum class GameState {
 };
 class Game {
 public:
-        Game(Term *game_terminal);
+        Game();
         ~Game();
         void init();
         void cleanup();
         void redraw();
         void loop();
 private:
-        Term *m_terminal; // Some kind of context
+        Term m_terminal; // Some kind of context
         Win *m_status_bar;
         Win *m_world_screen;
         GameState m_state;

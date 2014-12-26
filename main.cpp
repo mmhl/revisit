@@ -13,9 +13,7 @@ int main() {
          * Not sure if this is ok to create term context here, instead in game.
          * This will relieve Game class to cleanup after Term.
          */
-        Term term;
-        term.init();
-        Game new_game(&term);
+        Game new_game;
         new_game.init();
         new_game.loop();
         return 0;
