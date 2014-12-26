@@ -12,6 +12,7 @@ public:
         ~Game();
         void init();
         void cleanup();
+        void redraw();
         void loop();
 private:
         Term *m_terminal; // Some kind of context

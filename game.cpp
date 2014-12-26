@@ -1,4 +1,5 @@
 #include "game.h"
+#include <unistd.h>
 
 Game::Game(Term *gameTerminal)
 : m_terminal(gameTerminal), m_status_bar(nullptr), m_world_screen(nullptr), m_state(GameState::RUNNING) {
@@ -15,12 +16,13 @@ void Game::init() {
 }
 void Game::cleanup() {
 }
+void Game::redraw() {
+        m_world_screen->refresh();
+        m_status_bar->refresh();
+}
 
 void Game::loop() {
         while(m_state == GameState::RUNNING) {
-                int ch;
-                if((ch = m_terminal->term_getch()) == 'q') {
-                        m_state= GameState::EXITING;
-                }
+                redraw();
         }
 }
