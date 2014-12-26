@@ -5,23 +5,20 @@
 #include <unistd.h>
 #include <sstream>
 #include "term.h"
+#include "game.h"
 
 int main() {
         setlocale(LC_ALL, "");
+        /*
+         * Not sure if this is ok to create term context here, instead in game.
+         * This will relieve Game class to cleanup after Term.
+         */
         Term term;
         term.init();
-        TermSize tsize = term.get_size();
-        Win *game_window = term.new_window(tsize.y-3,tsize.x-1,0,0);
-        Win *status_window = term.new_window(3,tsize.x-1,tsize.y-3, 0);
-        char ch;
-        while((ch = term.term_getch()) != 'q') {
-                stringstream ss;
-                ss << "You pressed: " << ch; // Idea: Let class StatusBar be a stream.
-                status_window->erase();
-                status_window->print("You pressed: ");
-                status_window->print("\xE2\x98\xA0 ");
-                status_window->refresh();
-        }
+        Game new_game(&term);
+        new_game.init();
+        new_game.loop();
+        new_game.cleanup();
         return 0;
 }
 

@@ -5,6 +5,7 @@
 #include <vector>
 using namespace std;
 typedef cchar_t glyph;
+
 struct TermSize {
         int y;
         int x;
