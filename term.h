@@ -44,6 +44,7 @@ public:
         char term_getch();
         int set_delay(int tenths);
         Win *new_window(int,int,int,int);
+        WINDOW *get_term();
         TermSize get_size();
 protected:
         TermSize size;

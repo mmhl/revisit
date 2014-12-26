@@ -96,6 +96,9 @@ Win *Term::new_window(int size_y, int size_x, int beg_y, int beg_x) {
         if(curse_window == nullptr)
                 fatal("Can't create winndow with ncurses");
         box(curse_window, 0, 0);
+
+WINDOW *Term::get_term() {
+        return term_window;
 }
 
 Term::~Term() {
