@@ -16,6 +16,7 @@ int main() {
         Game new_game;
         new_game.init();
         new_game.loop();
+        new_game.cleanup();
         return 0;
 }
 
