@@ -1,6 +1,7 @@
 #ifndef __KEYBOARD_H__
 #define __KEYBOARD_H__
 #include <queue>
+#include "err.h"
 #include "term.h"
 /*
  * 1. TODO: Make Keyboard class a keyboard thread
@@ -15,12 +16,14 @@ public:
         /*
          * Enqueues the key
          */
-        Keyboard(bool blocking=false);
+        Keyboard(Term &term, bool blocking=false);
         int get(); // Get key or -1 on no key
+        void set_delay(int tenths);
         ~Keyboard();
 
 private:
         int m_last_char;
+        Term &m_terminal;
         std::queue<int> m_key_queue;
 };
 #endif
