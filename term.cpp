@@ -80,21 +80,22 @@ char Term::term_getch() {
 TermSize Term::get_size() {
         return size;
 }
+int Term::set_delay(int tenths) {
+        if(tenths == 0) {
+                nodelay(term_window, true);
+        }
+        else if(tenths > 0 && tenths < 256) {
+                halfdelay(tenths);
+        }
+        else 
+                return -1;
+        return 0;
+}
 Win *Term::new_window(int size_y, int size_x, int beg_y, int beg_x) {
         WINDOW *curse_window = newwin(size_y, size_x, beg_y, beg_x);  
         if(curse_window == nullptr)
                 fatal("Can't create winndow with ncurses");
         box(curse_window, 0, 0);
-        try {
-                Win *win = new Win(curse_window, size_y,size_x,beg_y,beg_x);
-                windows.push_back(win);
-                wrefresh(term_window);
-                win->refresh(); 
-                return win;
-        }
-        catch(std::bad_alloc &e) {
-                fatal("Bad alloc: " + std::string(e.what()));
-        }
 }
 
 Term::~Term() {

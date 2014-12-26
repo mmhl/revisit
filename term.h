@@ -42,6 +42,7 @@ public:
         void init(); 
         void end();
         char term_getch();
+        int set_delay(int tenths);
         Win *new_window(int,int,int,int);
         TermSize get_size();
 protected:
