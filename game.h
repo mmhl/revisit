@@ -2,6 +2,7 @@
 #define __GAME_H__
 #include "term.h"
 #include "object.h"
+#include "keyboard.h"
 
 enum class GameState {
         RUNNING,
@@ -22,5 +23,6 @@ private:
         Win *m_world_screen;
         GameState m_state;
         Object m_test_player; // TEMP
+        Keyboard m_controller;
 };
 #endif
