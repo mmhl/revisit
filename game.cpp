@@ -14,12 +14,18 @@ void Game::init() {
         struct TermSize term_size = m_terminal.get_size();
         m_status_bar = m_terminal.new_window(3,term_size.x-1,term_size.y-3, 0);
         m_world_screen = m_terminal.new_window(term_size.y-3,term_size.x-1,0,0);
-        m_controller.set_delay(0);
         m_test_player.set_win(m_world_screen);
         m_test_player.set_pos(2,3);
         m_test_player.set_glyph('@');
+        m_controller.set_delay(1);
+        m_controller.start();
 }
 void Game::cleanup() {
+        m_status_bar->print("Waiting for keyboard controller to finish");
+        redraw();
+        m_controller.stop();
+        m_status_bar->print("Keyboard controller stopped");
+        redraw();
         m_terminal.end();
 }
 void Game::redraw() {
@@ -29,12 +35,14 @@ void Game::redraw() {
 
 void Game::loop() {
         while(m_state == GameState::RUNNING) {
-                int key = m_controller.get();
-                if(key == 'q')
-                        m_state= GameState::EXITING;
-                if(key != -1)
-                        m_status_bar->print(key);
-                m_test_player.draw();
+                int key;
+                if(m_controller.poll_key(key))  {
+                        m_status_bar->print((char)key);
+                        if(key == 'q') 
+                                m_state = GameState::EXITING;
+                }
                 redraw();
         }
+        m_status_bar->print("Exiting");
+        redraw();
 }

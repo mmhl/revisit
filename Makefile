@@ -1,6 +1,6 @@
 CC=g++
 EXECUTABLE=revisit
-CXXFLAGS=--std=c++11 -Wall -o $@
+CXXFLAGS=--std=c++11 -Wall -pthread -o $@
 LDFLAGS=-lncursesw
 
 all: $(EXECUTABLE) 

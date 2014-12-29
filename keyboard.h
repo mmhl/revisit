@@ -1,6 +1,8 @@
 #ifndef __KEYBOARD_H__
 #define __KEYBOARD_H__
 #include <queue>
+#include <atomic>
+#include <thread>
 #include "err.h"
 #include "term.h"
 /*
@@ -17,13 +19,19 @@ public:
          * Enqueues the key
          */
         Keyboard(Term &term, bool blocking=false);
-        int get(); // Get key or -1 on no key
         void set_delay(int tenths);
+        void start();
+        void stop();
+        int poll_key(int &val);
         ~Keyboard();
 
 private:
         int m_last_char;
+        int get(); // Get key or -1 on no key
+        void thread_loop();
         Term &m_terminal;
         std::queue<int> m_key_queue;
+        std::thread m_thread;
+        std::atomic_bool m_running;
 };
 #endif
