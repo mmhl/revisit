@@ -12,7 +12,9 @@
 #include <iostream>
 #include <ncursesw/ncurses.h>
 using namespace std;
+
 typedef int NC_ATTRIBUTE;
+typedef cchar_t glyph;
 
 enum class CHAR_ATTR {
     BOLD,

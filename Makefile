@@ -10,6 +10,8 @@ main.o: main.cpp
 	$(CC) $(CXXFLAGS) -c main.cpp
 term.o: term.cpp 
 	$(CC) $(CXXFLAGS) -c term.cpp 
+Win.o:	Win.cpp
+	$(CC) $(CXXFLAGS) -c Win.cpp
 game.o: game.cpp
 	$(CC) $(CXXFLAGS) -c game.cpp
 object.o: object.cpp

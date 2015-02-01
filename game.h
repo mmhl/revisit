@@ -1,6 +1,7 @@
 #ifndef __GAME_H__
 #define __GAME_H__
 #include "term.h"
+#include "Win.h"
 #include "object.h"
 #include "keyboard.h"
 

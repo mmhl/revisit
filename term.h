@@ -3,8 +3,11 @@
 #include <ncursesw/curses.h>
 #include <string>
 #include <vector>
+
+#include "err.h"
+#include "Win.h"
+
 using namespace std;
-typedef cchar_t glyph;
 
 struct TermSize {
     int y;

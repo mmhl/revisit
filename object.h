@@ -1,6 +1,7 @@
 #ifndef __OBJECT_H__
 #define __OBJECT_H__
 #include "term.h"
+#include "Win.h"
 #include "draw.h"
 
 class Object : public IDrawable {
