@@ -20,7 +20,7 @@ static const map<CHAR_ATTR, NC_ATTRIBUTE> attr_map
 };
 
 Win::Win(WINDOW *win, int size_y, int size_x, int beg_y, int beg_x)
-: size_y(size_y), pos_y(beg_y), pos_x(beg_x),
+: m_sizey(size_y), m_posy(beg_y), m_posx(beg_x),
 m_bordered_win(win), m_drawable_win(nullptr), m_cury(0), m_curx(0) {
     m_drawable_win = derwin(win, size_y - 2, size_x - 2, 1, 1);
 };

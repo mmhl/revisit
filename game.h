@@ -2,9 +2,8 @@
 #define __GAME_H__
 #include "term.h"
 #include "Win.h"
-#include "object.h"
 #include "keyboard.h"
-
+#include <memory>
 enum class GameState {
         RUNNING,
         PAUSED,
@@ -20,10 +19,9 @@ public:
         void loop();
 private:
         Term m_terminal; // Some kind of context
-        Win *m_status_bar;
-        Win *m_world_screen;
+        unique_ptr<Win> m_status_bar;
+        unique_ptr<Win> m_world_screen;
         GameState m_state;
-        Object m_test_player; // TEMP
         Keyboard m_controller;
 };
 #endif

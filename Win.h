@@ -40,7 +40,7 @@ public:
         int win_attr_off();
         virtual ~Win();
 protected:
-        int size_y, size_x, pos_y, pos_x;
+        int m_sizey, m_sizex, m_posy, m_posx;
 private:
         WINDOW *m_bordered_win;
         WINDOW *m_drawable_win; // drawing area of bordered window

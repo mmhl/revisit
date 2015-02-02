@@ -6,7 +6,7 @@
 
 #include "err.h"
 #include "Win.h"
-
+#include <memory>
 using namespace std;
 
 struct TermSize {
@@ -21,14 +21,12 @@ public:
     void init();
     void end();
     char term_getch();
-    int set_delay(int tenths);
-    Win *new_window(int, int, int, int);
-    WINDOW *get_term();
+    int set_keyboard_delay(int tenths);
+    unique_ptr<Win> new_window(int, int, int, int);
     TermSize get_size();
 protected:
-    TermSize size;
+    TermSize m_size;
 private:
-    vector<Win *> m_windows;
     WINDOW *m_stdscr; // Main term window; stdscr
 };
 

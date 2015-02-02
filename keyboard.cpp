@@ -8,7 +8,7 @@ Keyboard::~Keyboard() {
 }
 
 void Keyboard::set_delay(int tenths) {
-        if(m_terminal.set_delay(tenths) == -1) {
+        if(m_terminal.set_keyboard_delay(tenths) == -1) {
                 fatal("Bad delay value for keyboard");
         }
 }
