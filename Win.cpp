@@ -61,16 +61,18 @@ void Win::erase() {
     refresh();
 }
 
-int Win::win_attr_on(CHAR_ATTR attr) {
+int Win::win_attr_on(CHAR_ATTR attribute) {
+    int err = 0;
     try {
-        auto attr = attr_map.at(attr);
+        auto attr = attr_map.at(attribute);
         wattrset(m_drawable_win, attr);
+	refresh();
     } catch (out_of_range &oor) {
         //No such attribute, don't set anything
         //In future, log this.
+	err = -1;
     }
-    refresh();
-    return 0;
+    return err;
 }
 
 int Win::win_attr_off() {

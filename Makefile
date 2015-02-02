@@ -4,8 +4,8 @@ CXXFLAGS=--std=c++11 -Wall -o $@
 LDFLAGS=-lncursesw
 
 all: $(EXECUTABLE) 
-$(EXECUTABLE): main.o term.o game.o object.o err.o keyboard.o
-	$(CC) $(CXXFLAGS) main.o term.o game.o object.o err.o  keyboard.o $(LDFLAGS)
+$(EXECUTABLE): main.o term.o game.o object.o err.o keyboard.o Win.o
+	$(CC) $(CXXFLAGS) main.o term.o game.o object.o err.o  keyboard.o Win.o $(LDFLAGS)
 main.o: main.cpp
 	$(CC) $(CXXFLAGS) -c main.cpp
 term.o: term.cpp 
@@ -20,3 +20,8 @@ err.o: err.cpp
 	$(CC) $(CXXFLAGS) -c err.cpp
 keyboard.o: keyboard.cpp
 	$(CC) $(CXXFLAGS) -c keyboard.cpp
+
+
+.PHONY: clean
+clean:
+	rm -Rf *.o $(EXECUTABLE)

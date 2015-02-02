@@ -16,7 +16,7 @@ void Game::init() {
         m_world_screen = m_terminal.new_window(term_size.y-3,term_size.x-1,0,0);
         m_controller.set_delay(0);
         m_test_player.set_win(m_world_screen);
-        m_test_player.set_pos(2,3);
+        m_test_player.set_pos(5,5);
         m_test_player.set_glyph('@');
 }
 void Game::cleanup() {
