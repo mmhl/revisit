@@ -14,13 +14,11 @@
 
 static const map<CHAR_ATTR, NC_ATTRIBUTE> attr_map
 {
-    {
-        CHAR_ATTR::BOLD, A_BOLD
-    }
+    { CHAR_ATTR::BOLD, A_BOLD }
 };
 
 Win::Win(WINDOW *win, int size_y, int size_x, int beg_y, int beg_x)
-: m_sizey(size_y), m_posy(beg_y), m_posx(beg_x),
+: m_sizey(size_y), m_sizex(size_x), m_posy(beg_y), m_posx(beg_x),
 m_bordered_win(win), m_drawable_win(nullptr), m_cury(0), m_curx(0) {
     m_drawable_win = derwin(win, size_y - 2, size_x - 2, 1, 1);
 };
@@ -70,7 +68,7 @@ int Win::win_attr_on(CHAR_ATTR attribute) {
     } catch (out_of_range &oor) {
         //No such attribute, don't set anything
         //In future, log this.
-	err = -1;
+    	err = -1;
     }
     return err;
 }
