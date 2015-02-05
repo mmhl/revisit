@@ -26,3 +26,10 @@
 *.exe
 *.out
 *.app
+
+#eclipse and netbeans directories
+nbproject/
+.settings/
+.project/
+.cproject
+.project
