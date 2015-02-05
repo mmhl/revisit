@@ -5,7 +5,7 @@
 #include <vector>
 
 #include "err.h"
-#include "Win.h"
+#include "TermWin.h"
 #include <memory>
 using namespace std;
 
@@ -18,11 +18,12 @@ class Term {
 public:
     Term();
     virtual ~Term();
+    Term(const Term &other) = delete;
+    Term &operator=(const Term &other) = delete;
     void init();
     void end();
     char term_getch();
     int set_keyboard_delay(int tenths);
-    unique_ptr<Win> new_window(int, int, int, int);
     TermSize get_size();
 protected:
     TermSize m_size;

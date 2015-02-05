@@ -43,17 +43,6 @@ int Term::set_keyboard_delay(int tenths) {
 }
 //
 
-unique_ptr<Win> Term::new_window(int size_y, int size_x, int beg_y, int beg_x) {
-    WINDOW *curse_window = newwin(size_y, size_x, beg_y, beg_x);
-    if (curse_window == nullptr)
-        fatal("Can't create window with ncurses");
-    box(curse_window, 0, 0);
-    unique_ptr<Win> win(new Win(curse_window, size_y, size_x, beg_y, beg_x));
-    wrefresh(m_stdscr);
-    win->refresh();
-    return win;
-}
-
 Term::~Term() {
     endwin();
     m_stdscr = nullptr;

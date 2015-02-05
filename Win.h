@@ -19,9 +19,6 @@ typedef cchar_t glyph;
 enum class CHAR_ATTR {
     BOLD,
 };
-/*
- * TODO: Consider BordederWin that inherits from Win
- */
 
 /*
  * Win - window in which we can draw something
