@@ -1,4 +1,5 @@
 #include "game.h"
+#include "TermWin.h"
 #include <unistd.h>
 
 Game::Game()
@@ -13,8 +14,6 @@ Game::~Game() {
 void Game::init() {
         m_terminal.init();
         struct TermSize term_size = m_terminal.get_size();
-        m_status_bar = m_terminal.new_window(3,term_size.x-1,term_size.y-3, 0);
-        m_world_screen = m_terminal.new_window(term_size.y-3,term_size.x-1,0,0);
         m_controller.set_delay(0);
 }
 void Game::cleanup() {
