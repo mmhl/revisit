@@ -60,15 +60,13 @@ int TermWin::cur_move(int y, int x) {
 int TermWin::del_win() {
 	int child_del_status = OK;
 	for(auto child : m_children) {
-		if(child->m_nc_win != nullptr) { // Was that child killed itself?
 			child_del_status |= child->del_win();
-		}
 	}
 	if(child_del_status != OK) {
 		fatal("Deletion of subwindows failed!");
 	}
 	int ret = 0;
-	if(m_nc_win) {
+	if(m_nc_win) { // We could have delete child window on its own, m_nc_win would be nullptr
 		wclear(m_nc_win); // clear the screen before we destroy window
 		ret = delwin(m_nc_win);
 		m_nc_win = nullptr;
