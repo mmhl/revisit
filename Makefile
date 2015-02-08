@@ -1,17 +1,17 @@
 CC=g++
 EXECUTABLE=revisit
-CXXFLAGS=--std=c++11 -Wall -o $@
+CXXFLAGS=-std=c++11 -pedantic -Wall -o $@
 LDFLAGS=-lncursesw
 
 all: $(EXECUTABLE) 
-$(EXECUTABLE): main.o term.o game.o err.o keyboard.o Win.o TermWin.o
-	$(CC) $(CXXFLAGS) main.o term.o game.o err.o keyboard.o Win.o TermWin.o $(LDFLAGS)
+$(EXECUTABLE): main.o term.o game.o err.o keyboard.o Window.o TermWin.o
+	$(CC) $(CXXFLAGS) main.o term.o game.o err.o keyboard.o Window.o TermWin.o $(LDFLAGS)
 main.o: main.cpp
 	$(CC) $(CXXFLAGS) -c main.cpp
 term.o: term.cpp 
 	$(CC) $(CXXFLAGS) -c term.cpp 
-Win.o:	Win.cpp
-	$(CC) $(CXXFLAGS) -c Win.cpp
+Window.o:	Window.cpp
+	$(CC) $(CXXFLAGS) -c Window.cpp
 TermWin.o: TermWin.cpp
 	$(CC) $(CXXFLAGS) -c TermWin.cpp
 game.o: game.cpp

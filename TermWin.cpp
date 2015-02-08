@@ -58,16 +58,9 @@ int TermWin::cur_move(int y, int x) {
 }
 
 int TermWin::del_win() {
-	int child_del_status = OK;
-	for(auto child : m_children) {
-			child_del_status |= child->del_win();
-	}
-	if(child_del_status != OK) {
-		fatal("Deletion of subwindows failed!");
-	}
 	int ret = 0;
-	if(m_nc_win) { // We could have delete child window on its own, m_nc_win would be nullptr
-		wclear(m_nc_win); // clear the screen before we destroy window
+	if(m_nc_win) {
+		wclear(m_nc_win);
 		ret = delwin(m_nc_win);
 		m_nc_win = nullptr;
 	}
@@ -75,10 +68,13 @@ int TermWin::del_win() {
 
 }
 int TermWin::put_wchar_at(const cchar_t &ch, int y, int x) {
-	return mvwadd_wch(m_nc_win, y, x, &ch);
+	return mvwadd_wch(m_nc_win, y, x, &ch) == OK ? 0 : -1;
 }
 int TermWin::put_char_at(const char &ch, int y, int x) {
-	return mvwaddch(m_nc_win, y, x, ch);
+	return mvwaddch(m_nc_win, y, x, ch) == OK ? 0 : -1;
+}
+int TermWin::put_cstr_at(const char *ch, int y, int x) {
+	return mvwprintw(m_nc_win, y, x, "%s", ch) == OK ? 0 : -1;
 }
 TermWin TermWin::create_children_win(int beg_y, int beg_x, int lines, int columns, bool rel) {
 	WINDOW *nc_win;
@@ -92,6 +88,5 @@ TermWin TermWin::create_children_win(int beg_y, int beg_x, int lines, int column
 		fatal("Can't create subwindow!");
 	}
 	TermWin new_termwin = TermWin(nc_win, beg_y, beg_x, lines, columns);
-	m_children.push_back(&new_termwin);
 	return new_termwin;
 }
