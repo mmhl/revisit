@@ -4,14 +4,16 @@ CXXFLAGS=-std=c++11 -pedantic -Wall -o $@
 LDFLAGS=-lncursesw
 
 all: $(EXECUTABLE) 
-$(EXECUTABLE): main.o term.o game.o err.o keyboard.o Window.o TermWin.o
-	$(CC) $(CXXFLAGS) main.o term.o game.o err.o keyboard.o Window.o TermWin.o $(LDFLAGS)
+$(EXECUTABLE): main.o term.o game.o err.o keyboard.o Window.o BoxedWindow.o TermWin.o
+	$(CC) $(CXXFLAGS) main.o term.o game.o err.o keyboard.o Window.o BoxedWindow.o TermWin.o $(LDFLAGS)
 main.o: main.cpp
 	$(CC) $(CXXFLAGS) -c main.cpp
 term.o: term.cpp 
 	$(CC) $(CXXFLAGS) -c term.cpp 
 Window.o:	Window.cpp
 	$(CC) $(CXXFLAGS) -c Window.cpp
+BoxedWindow.o: BoxedWindow.cpp
+	$(CC) $(CXXFLAGS) -c BoxedWindow.cpp
 TermWin.o: TermWin.cpp
 	$(CC) $(CXXFLAGS) -c TermWin.cpp
 game.o: game.cpp

@@ -76,6 +76,10 @@ int TermWin::put_char_at(const char &ch, int y, int x) {
 int TermWin::put_cstr_at(const char *ch, int y, int x) {
 	return mvwprintw(m_nc_win, y, x, "%s", ch) == OK ? 0 : -1;
 }
+
+int TermWin::create_box() {
+	return box(m_nc_win, 0, 0);
+}
 TermWin TermWin::create_children_win(int beg_y, int beg_x, int lines, int columns, bool rel) {
 	WINDOW *nc_win;
 	if(rel == true) {

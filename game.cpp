@@ -15,9 +15,8 @@ Game::~Game() {
 //Create class that contains all objects, and can draw them on Win ???
 void Game::init() {
 	m_terminal.init();
-	struct TermSize term_size = m_terminal.get_size();
-	m_world_screen = unique_ptr<Window>(new Window(0, 0, 5, 5));
-	m_status_bar = unique_ptr<Window>(new Window(7, 8, 5, 5));
+	m_world_screen = unique_ptr<BoxedWindow>(new BoxedWindow(0, 0, 5, 5));
+	m_status_bar = unique_ptr<BoxedWindow>(new BoxedWindow(7, 8, 5, 5));
 	m_controller.set_delay(0);
 }
 void Game::cleanup() {
@@ -35,7 +34,7 @@ void Game::loop() {
 		if (key == 'q')
 			m_state = GameState::EXITING;
 		else if (key != -1) {
-			ss << key;
+			ss << (static_cast<char>(key));
 			m_status_bar->print(ss.str());
 			m_world_screen->print(ss.str());
 		}

@@ -23,6 +23,8 @@ public:
 	int put_wchar_at(const cchar_t &ch, int y, int x);
 	int put_char_at(const char &ch, int y, int x);
 	int put_cstr_at(const char *ch, int y, int x);
+	//Create standard box
+	int create_box();
 	// @rel - position new subwindow relatively to parent?
 	TermWin create_children_win(int beg_y, int beg_x, int lines, int columns, bool rel = false);
 	virtual ~TermWin();

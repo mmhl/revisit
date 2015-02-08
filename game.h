@@ -2,6 +2,7 @@
 #define __GAME_H__
 #include "term.h"
 #include "Window.h"
+#include "BoxedWindow.h"
 #include "keyboard.h"
 #include <memory>
 enum class GameState {

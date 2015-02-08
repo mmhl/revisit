@@ -13,6 +13,13 @@ m_term_win(TermWin(beg_y, beg_x, lines, columns)) {
 	m_cursor_pos = {0, 0};
 }
 
+Window::Window(TermWin term_win, int lines, int columns) :
+m_term_win(term_win) {
+	m_win_size.columns = columns;
+	m_win_size.lines = lines;
+	m_cursor_pos = {0, 0};
+}
+
 Window::~Window() {
 
 }
@@ -36,7 +43,18 @@ void Window::redraw() {
 	m_term_win.refresh();
 }
 
+Window Window::create_child_window(int beg_y, int beg_x, int lines, int columns, bool rel) {
+	TermWin child_termwin = m_term_win.create_children_win(beg_y, beg_x,lines,columns,rel);
+	Window new_win = Window(child_termwin, lines, columns);
+	return new_win;
+}
+
 void Window::cursor_pos_update() {
 	m_term_win.cur_move(m_cursor_pos.y, m_cursor_pos.x);
 }
+
+int Window::box() {
+	return m_term_win.create_box();
+}
+
 

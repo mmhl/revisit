@@ -34,9 +34,13 @@ public:
 protected:
 	WinSize m_win_size;
 	WinCurPos m_cursor_pos;
+	Window create_child_window(int beg_y, int beg_x, int lines, int columns, bool rel = false);
+	int box();
 
 private:
-	Window(TermWin term_win, int beg_x, int beg_y, int lines, int columns);
+	//TODO: Is it good idea to create constructor that only takes one parameter,
+	//TermWin, and inherits all settings?
+	Window(TermWin term_win, int lines, int columns);
 	void cursor_pos_update();
 	TermWin m_term_win;
 };
